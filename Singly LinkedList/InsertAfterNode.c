@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Student{
+    int Rollno;
+    struct Student *next;
+};
+
+struct Student *head;
+
+void Display(){
+    struct Student *N;
+    N = head;
+    while(N != NULL){
+        printf("Nodes Present : ");
+        printf("%d",N -> Rollno);
+        printf("\n");
+        N = N -> next;
+    } 
+}
+
+int InsAfterNode(){
+    struct Student *N,*T;
+    int aft;
+    printf("\nEnter the Node You want to enter after : ");
+    scanf("%d",aft);
+    T = (struct Student *)malloc(sizeof(struct Student));
+    printf("Enter New Node : ");
+    scanf("%d",&T -> Rollno);
+    T -> next = NULL;
+    N = head;
+    printf("Before Working : ");
+    while(N -> Rollno != aft && N != NULL){
+        printf(" %d",N -> Rollno);
+        N = N -> next;
+    }
+    printf("%d",N -> Rollno);
+    return 0;
+    if(N -> Rollno == aft){
+        T -> next = N -> next;
+        N -> next = T;
+    }
+}
+
+void main(){
+    int i;
+    head = NULL;
+    struct Student *T,*N;
+    for(i = 0 ; i < 3 ; i++){
+        T = (struct Student *)malloc(sizeof(struct Student));
+        printf("Enter node %d :",i );
+        scanf("%d",&T -> Rollno);
+        T -> next = NULL;
+
+        if(head == NULL){
+            head = T;
+        }
+        else {
+            N=head;
+            while(N -> next != NULL){
+                N = N -> next;
+            }
+            N ->next = T;
+        }
+    }
+   printf("\nNodes Present : \n"); 
+   Display();
+   InsAfterNode();
+   printf("\nNodes Present after insertion : \n");
+   Display();
+}
