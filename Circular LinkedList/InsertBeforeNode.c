@@ -19,6 +19,30 @@ void Display(){
     }while(N != last -> next);
 }
 
+void InsAfterNode(){
+    struct Node *T, *P;
+    int aft;
+    T = (struct Node*)malloc(sizeof(struct Node));
+    printf("Enter the data to be inserted: ");
+    scanf("%d", &T -> data);
+    T -> next = NULL;
+    printf("Enter the node after which the data is to be inserted: ");
+    scanf("%d", &aft);
+    P = last -> next;
+    do{
+        if (P -> data == aft){
+            T -> next = P -> next;
+            P -> next = T;
+            if (P == last){
+                last = T;
+            }
+            return;
+        }
+        P = P -> next;
+    }while(P != last -> next);
+    printf("Node not found\n");
+}
+
 void InsBeforeNode(){
     struct Node *T, *P;
     int bef;
@@ -42,6 +66,36 @@ void InsBeforeNode(){
     }while(P != last -> next);
     printf("Node not found\n");
 }
+
+void DelBeg(){
+    struct Node *P;
+    P = last -> next;
+    last -> next = P -> next;
+    free(P);
+}
+
+void DelAfterNode(){
+    struct Node *P, *Q;
+    int aft;
+    printf("Enter the node after which the data is to be deleted: ");
+    scanf("%d", &aft);
+    P = last -> next;
+    do{
+        if (P -> data == aft){
+            Q = P -> next;
+            P -> next = Q -> next;
+            if (Q == last){
+                last = P;
+            }
+            free(Q);
+            return;
+        }
+        P = P -> next;
+    }while(P != last -> next);
+    printf("Node not found\n");
+}
+
+
 
 void main(){
     struct Node *T;
@@ -69,5 +123,20 @@ void main(){
 
     InsBeforeNode();
     printf("\nCircular Link List after insertion\n");
+    Display();
+    DelBeg();
+    printf("\nCircular Link List after deletion\n");
+    Display();
+    DelAfterNode();
+    printf("\nCircular Link List after deletion\n");
+    Display();
+    DelBeforeNode();
+    printf("\nCircular Link List after deletion\n");
+    Display();
+    InsAfterNode();
+    printf("\nCircular Link List after insertion\n");
+    Display();
+    DelEnd();
+    printf("\nCircular Link List after deletion\n");
     Display();
 }

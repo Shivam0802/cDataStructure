@@ -19,24 +19,24 @@ void Display(){
     } 
 }
 
-int InsAfterNode(){
-    struct Student *N,*T;
-    int aft;
-    printf("\nEnter the Node You want to enter after : ");
-    scanf("%d",aft);
+void InsAfterNode(){
+    int Aft;
+    struct Student *T,*N;
+    printf("Enter the node after which you want to insert : ");
+    scanf("%d",&Aft);
     T = (struct Student *)malloc(sizeof(struct Student));
-    printf("Enter New Node : ");
+    printf("Enter the Node : ");
     scanf("%d",&T -> Rollno);
     T -> next = NULL;
+
     N = head;
-    printf("Before Working : ");
-    while(N -> Rollno != aft && N != NULL){
-        printf(" %d",N -> Rollno);
+    while(N -> Rollno != Aft && N != NULL){
         N = N -> next;
     }
-    printf("%d",N -> Rollno);
-    return 0;
-    if(N -> Rollno == aft){
+    if(N == NULL){
+        printf("Node not found");
+    }
+    else{
         T -> next = N -> next;
         N -> next = T;
     }
